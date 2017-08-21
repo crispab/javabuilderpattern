@@ -35,7 +35,7 @@ public class EmailMessageV2 {
     }
 
     public static class Builder {
-        private EmailMessageV2 instance = new EmailMessageV2();
+        private final EmailMessageV2 instance = new EmailMessageV2();
 
         private Builder() {
         }

@@ -54,15 +54,10 @@ public class EmailMessageV3 {
     }
 
     private static class Builder implements ITo, ISubject, IContent, IBuild {
-        private EmailMessageV3 instance = new EmailMessageV3();
+        private final EmailMessageV3 instance = new EmailMessageV3();
 
         public Builder(String from) {
             instance.from = from;
-        }
-
-        public ITo from(String from) {
-            instance.from = from;
-            return this;
         }
 
         @Override

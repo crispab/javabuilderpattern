@@ -58,15 +58,10 @@ public class EmailMessageV3Required {
     }
 
     private static class Builder implements RequiredFrom, RequiredTo, RequiredSubject, RequiredContent, OptionalMimeType {
-        private EmailMessageV3Required instance = new EmailMessageV3Required();
+        private final EmailMessageV3Required instance = new EmailMessageV3Required();
 
         public Builder(String from) {
             instance.from = from;
-        }
-
-        public RequiredFrom from(String from) {
-            instance.from = from;
-            return this;
         }
 
         @Override
