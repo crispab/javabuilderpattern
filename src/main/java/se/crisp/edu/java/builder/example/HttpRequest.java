@@ -1,5 +1,7 @@
 package se.crisp.edu.java.builder.example;
 
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -134,8 +136,16 @@ public class HttpRequest {
         public String getQueryString() {
             return String.join("&",
                     parameters.entrySet().stream()
-                            .map(e -> e.getKey() + "=" + e.getValue())
+                            .map(e -> encode(e.getKey()) + "=" + encode(e.getValue()))
                             .collect(toList()));
+        }
+
+        private String encode(String string)  {
+            try {
+                return URLEncoder.encode(string, "UTF-8");
+            } catch (UnsupportedEncodingException e) {
+                return "";  // Happens when UTF-8 is not supported
+            }
         }
 
         public interface OptionalParameter {

@@ -55,8 +55,7 @@ public class HttpRequestTest {
 
         String queryParameters = request.getQueryString();
 
-        assertThat(queryParameters, is(SOME_KEY + "=" + SOME_VALUE +
-                "&" + SOME_KEY_2 + "=" + SOME_VALUE_2));
+        assertThat(queryParameters, is("some+key=some+value&some+key+2=some+value+2"));
     }
 
     @Test
@@ -74,6 +73,6 @@ public class HttpRequestTest {
 
         String queryParameters = request.getQueryString();
 
-        assertThat(queryParameters, is(SOME_KEY_2 + "=" + SOME_VALUE_2));
+        assertThat(queryParameters, is("some+key+2=some+value+2"));
     }
 }
