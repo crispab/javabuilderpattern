@@ -3,6 +3,8 @@ package se.crisp.edu.java.builder.example;
 import java.util.HashMap;
 import java.util.Map;
 
+import static java.util.stream.Collectors.toList;
+
 @SuppressWarnings("WeakerAccess")
 public class HttpRequest {
     private String url;
@@ -27,6 +29,10 @@ public class HttpRequest {
 
     public String getParameter(String key) {
         return parameters.get(key);
+    }
+
+    public String getQueryString() {
+        return parameters.getQueryString();
     }
 
     public interface RequiredUrl {
@@ -123,6 +129,13 @@ public class HttpRequest {
 
         private void put(String key, String value) {
             parameters.put(key, value);
+        }
+
+        public String getQueryString() {
+            return String.join("&",
+                    parameters.entrySet().stream()
+                            .map(e -> e.getKey() + "=" + e.getValue())
+                            .collect(toList()));
         }
 
         public interface OptionalParameter {

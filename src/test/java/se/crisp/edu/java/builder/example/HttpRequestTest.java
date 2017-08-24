@@ -38,4 +38,42 @@ public class HttpRequestTest {
         assertThat(request.getCustomHeader(SOME_CUSTOM_HEADER), is(SOME_CUSTOM_VALUE));
         assertThat(request.getParameter(SOME_KEY), is(SOME_VALUE));
     }
+
+    @Test
+    public void two_parameters_to_string() throws Exception {
+        HttpRequest request = HttpRequest
+                .url(SOME_URL)
+                .headers(HttpRequest.Headers
+                        .header(ContentType, SOME_MIME_TYPE)
+                        .build()
+                )
+                .parameters(HttpRequest.Parameters
+                        .parameter(SOME_KEY, SOME_VALUE)
+                        .parameter(SOME_KEY_2, SOME_VALUE_2)
+                        .build())
+                .build();
+
+        String queryParameters = request.getQueryString();
+
+        assertThat(queryParameters, is(SOME_KEY + "=" + SOME_VALUE +
+                "&" + SOME_KEY_2 + "=" + SOME_VALUE_2));
+    }
+
+    @Test
+    public void one_parameters_to_string() throws Exception {
+        HttpRequest request = HttpRequest
+                .url(SOME_URL)
+                .headers(HttpRequest.Headers
+                        .header(ContentType, SOME_MIME_TYPE)
+                        .build()
+                )
+                .parameters(HttpRequest.Parameters
+                        .parameter(SOME_KEY_2, SOME_VALUE_2)
+                        .build())
+                .build();
+
+        String queryParameters = request.getQueryString();
+
+        assertThat(queryParameters, is(SOME_KEY_2 + "=" + SOME_VALUE_2));
+    }
 }
