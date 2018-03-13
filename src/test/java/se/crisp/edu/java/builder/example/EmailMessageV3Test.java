@@ -6,6 +6,7 @@ import org.junit.Test;
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertThat;
+import static org.junit.Assert.assertTrue;
 
 public class EmailMessageV3Test {
 
@@ -46,4 +47,22 @@ public class EmailMessageV3Test {
         assertThat(emailMessageV3.getMimeType(), is(SOME_MIME_TYPE));
     }
 
+    @Test
+    public void ensure_two_builds_gets_different_instances() {
+        EmailMessageV3 email1 = EmailMessageV3
+                .from(SOME_SENDER)
+                .to(SOME_RECEIVER)
+                .subject(SOME_SUBJECT)
+                .content(SOME_CONTENT)
+                .build();
+
+        EmailMessageV3 email2 = EmailMessageV3
+                .from(SOME_SENDER)
+                .to(SOME_RECEIVER)
+                .subject(SOME_SUBJECT)
+                .content(SOME_CONTENT)
+                .build();
+
+        assertTrue(email1 != email2);
+    }
 }
